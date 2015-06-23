@@ -84,7 +84,7 @@ func (s *Copy) Apply() error {
 	defer r.Close()
 
 	if err := os.Rename(s.Name, s.Backup); err != nil {
-		if os.IsExist(err) {
+		if !os.IsNotExist(err) {
 			return err
 		}
 	}
@@ -229,7 +229,7 @@ func (s *Absence) Apply() error {
 	FileInfoCache.Lock()
 	defer FileInfoCache.ClearAndUnlock(s.Name)
 	err := os.Remove(s.Name)
-	if err != nil && os.IsExist(err) {
+	if err != nil && !os.IsNotExist(err) {
 		return err
 	}
 	return nil
@@ -239,7 +239,7 @@ func (s *Absence) Apply() error {
 func (s *Absence) Test() error {
 	_, err := FileInfoCache.Stat(s.Name)
 	if err != nil {
-		if os.IsExist(err) {
+		if !os.IsNotExist(err) {
 			return err
 		}
 		return nil
