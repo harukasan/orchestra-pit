@@ -1,3 +1,5 @@
+// Copyright 2015 MICHII Shunsuke. All rights reserved.
+
 package platform_test
 
 import (
