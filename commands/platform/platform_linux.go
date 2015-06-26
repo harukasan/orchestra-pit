@@ -18,10 +18,14 @@ import (
 // platform.
 var ErrNotIdentified = errors.New("the platform could not identified")
 
+// identifyFunc is a function which identifies the platform and retrieves the
+// release information. If the platform could not identified, the function that
+// implements identifyFunc should return ErrNotIdentified.
 type identifyFunc func() (*Info, error)
 
 var identifyFuncs = []identifyFunc{
 	IdentifyDebianRelease,
+	IdentifyRedHatRelease,
 }
 
 // Identify detects the platform and returns Info of the platform.

@@ -1,5 +1,4 @@
 // Copyright 2015 MICHII Shunsuke. All rights reserved.
-//
 
 /*
 Package platform implements gathering information about the platform.
@@ -15,6 +14,8 @@ const (
 	PlatformDebian    Name = "debian"
 	PlatformUbuntu    Name = "ubuntu"
 	PlatformLinuxMint Name = "linuxmint"
+	PlatformCentOS    Name = "centos"
+	PlatformRHEL      Name = "rhel"
 )
 
 // Family represents the family of platforms.
@@ -23,8 +24,9 @@ type Family string
 // Platform family definitions
 const (
 	FamilyUnknown Family = "unknown"  // unknown family
-	FamilyDebian  Family = "debian"   // debian, ubuntu, linuxmint, raspbian
+	FamilyDebian  Family = "debian"   // debian, ubuntu, linuxmint
 	FamilyOSX     Family = "mac_os_x" // only osx
+	FamilyRHEL    Family = "rhel"     // centos
 )
 
 // Info represents the facts about the platform.
