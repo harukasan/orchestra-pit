@@ -20,9 +20,7 @@ type StateFactory interface {
 	New(options Options) (State, error)
 }
 
-// StateFactoryFunc is function that creates and returns a new State with given
-// options parameters. If given options is invalid, StateFactory returns nil and
-// an error.
+// StateFactoryFunc is an adapter to use a function as StateFactory.
 type StateFactoryFunc func(options Options) (State, error)
 
 // New implements the StateFactory interface to use a StateFactoryFunc as
@@ -35,5 +33,26 @@ func (f StateFactoryFunc) New(options Options) (State, error) {
 //
 // Get returns the value string of the named parameter.
 type Options interface {
+	Get(name string) string
+}
+
+// Inspector is interface which retrieves the facts of the resource state.
+//
+// Get tries to retrieve information of the resource, and returns the facts or
+// an error.
+type Inspector interface {
+	Get() (Facts, error)
+}
+
+// InspectorFunc is an adapter to use a function as an Inspector.
+type InspectorFunc func() (Facts, error)
+
+// Get implements Inspector interface to use as an Inspector.
+func (f InspectorFunc) Get() (Facts, error) {
+	return f()
+}
+
+// Facts is interface of the attributes of information of the resource.
+type Facts interface {
 	Get(name string) string
 }
