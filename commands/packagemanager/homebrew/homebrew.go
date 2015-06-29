@@ -48,28 +48,8 @@ type PackageOption struct {
 	Description string `json:"description"`
 }
 
-// Path specifies the file path of homebrew binary.
+// Path specifies the file path of Homebrew binary.
 var Path = "/usr/local/bin/brew"
-
-// errNotFound is an error which is used when the package is not found.
-type errNotFound struct {
-	s string
-}
-
-func (e errNotFound) Error() string {
-	return e.s
-}
-
-func notFound(text string) error {
-	return &errNotFound{text}
-}
-
-// isNotFound returns true if whether the error is known to report that a
-// package is not found.
-func isNotFound(err error) bool {
-	_, ok := err.(*errNotFound)
-	return ok
-}
 
 // Info returns information of the named package.
 func Info(name string) (*Package, error) {
@@ -87,7 +67,7 @@ func Info(name string) (*Package, error) {
 	return &Package{}, notFound(fmt.Sprintf("package %s is not found", name))
 }
 
-// IsExist tests whether the named package exists
+// IsExist tests whether the named package exists.
 func IsExist(name string) (bool, error) {
 	_, err := Info(name)
 	if err != nil {
@@ -120,7 +100,7 @@ func Uninstall(name string) error {
 }
 
 // IsInstalled tests whether the named package is installed on the system.
-// If the named package is not installed (with given parameters), it returns
+// If the named package is not installed, or the execution fails, it returns
 // an error.
 //
 // If the version is specified, it checks whether the specified version is
@@ -130,7 +110,7 @@ func Uninstall(name string) error {
 // built with given options.
 //
 // To test whether the package is NOT installed, Use IsNotInstalled function
-// instead of this function.
+// instead of this.
 func IsInstalled(name string, version string, options []string) error {
 	pkg, err := Info(name)
 	if err != nil {
@@ -180,7 +160,7 @@ func IsInstalled(name string, version string, options []string) error {
 }
 
 // IsNotInstalled tests whether the named package is not installed on the system.
-// If the package is installed or failed to check, it returns an error.
+// If the package is installed or execution fails, it returns an error.
 func IsNotInstalled(name string) error {
 	pkg, err := Info(name)
 	if err != nil {
@@ -215,7 +195,7 @@ func Untap(name string) error {
 	return nil
 }
 
-// IsTapped tests wheter the given named repository is tapped.
+// IsTapped tests whether the given named repository is tapped.
 func IsTapped(name string) (bool, error) {
 	out, err := exec.Command(Path, "tap").Output()
 	if err != nil {
