@@ -7,6 +7,7 @@ package management system (PMS).
 Following PMSes is supported now:
 
   - Homebrew (Mac OS X)
+	- APT      (Debian and its derivatives)
 
 */
 package packagemanager
