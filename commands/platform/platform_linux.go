@@ -8,10 +8,10 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
-	"os/exec"
 	"sync"
 
 	"github.com/harukasan/orchestra-pit/commands"
+	"github.com/harukasan/orchestra-pit/commands/exec"
 )
 
 // ErrNotIdentified is an error caused when the function could not identify the

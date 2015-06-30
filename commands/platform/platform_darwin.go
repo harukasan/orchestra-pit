@@ -6,7 +6,7 @@
 package platform
 
 import (
-	"os/exec"
+	"github.com/harukasan/orchestra-pit/commands/exec"
 
 	"github.com/harukasan/orchestra-pit/commands"
 )
