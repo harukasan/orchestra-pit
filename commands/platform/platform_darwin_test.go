@@ -9,7 +9,7 @@ import (
 )
 
 func TestDetect(t *testing.T) {
-	f, err := platform.Detect()
+	f, err := platform.Identify()
 	if err != nil {
 		t.Errorf("got error, %v", err)
 	}
