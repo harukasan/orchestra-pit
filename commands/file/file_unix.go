@@ -5,10 +5,7 @@ package file
 import (
 	"fmt"
 	"os"
-	"strconv"
 	"syscall"
-
-	"github.com/harukasan/orchestra-pit/commands"
 )
 
 // Hardlink manages the hard link existence and where the file points to.
@@ -21,30 +18,6 @@ import (
 type Hardlink struct {
 	Name string
 	Src  string
-}
-
-// NewHardlinkState returns a new Hardlink state with the given options. If the
-// given options is not valid, NewHardlinkState returns nil and an error.
-//
-// NewHardlinkState has following options:
-//
-//   - name ... specifies the name of the hard link file
-//   - src ... specifies the source file which is pointed from the hard link
-//
-func NewHardlinkState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	src := options.Get("src")
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	if src == "" {
-		return nil, fmt.Errorf("src: not specified")
-	}
-
-	return &Hardlink{
-		Name: name,
-		Src:  src,
-	}, nil
 }
 
 // Apply tries to make a hardlink to src file.
@@ -87,30 +60,6 @@ type Symlink struct {
 	Src  string
 }
 
-// NewSymlinkState returns a new Symlink state with the given options. If the
-// given options is not valid, NewSymlinkState returns nil and an error.
-//
-// NewSymlinkState has following options:
-//
-//   - name ... specifies the name of the symbolic link file
-//   - src ... specifies the requesting source file which is pointed from the link
-//
-func NewSymlinkState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	src := options.Get("src")
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	if src == "" {
-		return nil, fmt.Errorf("src: not specified")
-	}
-
-	return &Symlink{
-		Name: name,
-		Src:  src,
-	}, nil
-}
-
 // Apply tries to make a symbolic link which is linked to the Src.
 func (s *Symlink) Apply() error {
 	FileInfoCache.Lock()
@@ -142,47 +91,6 @@ type Owner struct {
 	Name string
 	Uid  uint32
 	Gid  uint32
-}
-
-// NewOwnerState returns a new Owner state with the given options. If the
-// given options is not valid, NewOwnerState returns nil and an error.
-//
-// NewOwnerState have below options:
-//
-//   - name ... specifies the name of target file
-//   - uid ... specifies the requesting uid of the file owner
-//   - gid ... specifies the requesting gid of the group that owns the file
-//
-func NewOwnerState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	uidString := options.Get("uid")
-	gidString := options.Get("gid")
-
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	if uidString == "" {
-		return nil, fmt.Errorf("uid: not specified")
-	}
-	if gidString == "" {
-		return nil, fmt.Errorf("gid: not specified")
-	}
-
-	uid, err := strconv.Atoi(uidString)
-	if err != nil {
-		return nil, fmt.Errorf("uid: %s", err)
-	}
-
-	gid, err := strconv.Atoi(gidString)
-	if err != nil {
-		return nil, fmt.Errorf("uid: %s", err)
-	}
-
-	return &Owner{
-		Name: name,
-		Uid:  uint32(uid),
-		Gid:  uint32(gid),
-	}, nil
 }
 
 // Apply tries to change the file owner and group.
@@ -218,34 +126,6 @@ func (s *Owner) Test() error {
 type Mode struct {
 	Name string
 	Mode string
-}
-
-// NewModeState returns a new Mode state with the given options. If the given
-// options is not valid, NewModeState returns nil and an error.
-//
-// NewModeState has the following options:
-//
-//   - name ... specifies the name of the file
-//   - mode ... specifies the requesting mode of the file.
-//
-func NewModeState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	mode := options.Get("mode")
-
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	if mode == "" {
-		return nil, fmt.Errorf("mode: not specified")
-	}
-	if _, err := ParseMode(mode, os.FileMode(0)); err != nil {
-		return nil, err
-	}
-
-	return &Mode{
-		Name: name,
-		Mode: mode,
-	}, nil
 }
 
 // Apply tries to keep the file mode to the requested mode.

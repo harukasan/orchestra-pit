@@ -28,8 +28,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-
-	"github.com/harukasan/orchestra-pit/commands"
 )
 
 // Copy manages the file whose content is a copy of the src file.
@@ -45,30 +43,6 @@ type Copy struct {
 	Name   string
 	Src    string
 	Backup string
-}
-
-// NewCopyState returns a new Copy state with the given options. If the given
-// options is not valid, NewCopyState returns nil and an error.
-//
-// NewCopyState has following options:
-//
-//   - name ... specifies the name of the target file
-//   - src ... specifies the original source file
-//
-func NewCopyState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	src := options.Get("src")
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	if src == "" {
-		return nil, fmt.Errorf("src: not specified")
-	}
-
-	return &Copy{
-		Name: name,
-		Src:  src,
-	}, nil
 }
 
 // Apply tries to copy the content from the src file. When the backup value is
@@ -161,23 +135,6 @@ type Directory struct {
 	Name string
 }
 
-// NewDirectoryState returns a new Directory state with the given options. If
-// the given options is not valid, NewDirectoryState returns nil and an error.
-//
-// NewDirectoryState has following options:
-//
-//   - name ... specifies the name of the directory
-//
-func NewDirectoryState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	return &Directory{
-		Name: name,
-	}, nil
-}
-
 // Apply tries to make the named directory. If failed to make a directory, Apply
 // returns an error.
 func (s *Directory) Apply() error {
@@ -205,23 +162,6 @@ func (s *Directory) Test() error {
 //
 type Absence struct {
 	Name string
-}
-
-// NewAbsenceState returns a new Absence state of the given named file. If the
-// name attribute is not specified, NewAbsenceState returns nil and an error.
-//
-// NewAbsenceState has following options:
-//
-//   - name ... specifies the name of the file that should not exists.
-//
-func NewAbsenceState(options commands.Options) (commands.State, error) {
-	name := options.Get("name")
-	if name == "" {
-		return nil, fmt.Errorf("name: not specified")
-	}
-	return &Absence{
-		Name: name,
-	}, nil
 }
 
 // Apply tries to remove the file.

@@ -17,17 +17,6 @@ func (o options) Get(name string) string {
 	return o[name]
 }
 
-func TestNewHardlinkState(t *testing.T) {
-	o := options{
-		"name": "/tmp/dest",
-		"src":  "/tmp/source",
-	}
-	_, err := file.NewHardlinkState(o)
-	if err != nil {
-		t.Errorf("got error, %v", err)
-	}
-}
-
 func TestHardlink(t *testing.T) {
 	src := d.MakeDummyFile("source_file")
 
@@ -86,17 +75,6 @@ func TestHardlinkTestShouldFailWhenTheFilePointsToTheAnotherFile(t *testing.T) {
 	t.Log(err)
 }
 
-func TestNewSymlinkState(t *testing.T) {
-	o := options{
-		"name": "/tmp/dest",
-		"src":  "/tmp/source",
-	}
-	_, err := file.NewSymlinkState(o)
-	if err != nil {
-		t.Errorf("got error, %v", err)
-	}
-}
-
 func TestSymlink(t *testing.T) {
 	src := d.MakeDummyFile("test_symlink_")
 
@@ -146,18 +124,6 @@ func TestSymLinkTestShouldFailWhenTheFilePointsToTheAnotherFile(t *testing.T) {
 	t.Log(err)
 }
 
-func TestNewOwnerState(t *testing.T) {
-	o := options{
-		"name": "/tmp/dest",
-		"uid":  "0",
-		"gid":  "0",
-	}
-	_, err := file.NewOwnerState(o)
-	if err != nil {
-		t.Errorf("got error, %v", err)
-	}
-}
-
 func TestOwner(t *testing.T) {
 	target := d.MakeDummyFile("test_owner_")
 
@@ -180,17 +146,6 @@ func TestOwner(t *testing.T) {
 	}
 	if err := s.Test(); err != nil {
 		t.Errorf("got error on test: %v", err)
-	}
-}
-
-func TestNewModeState(t *testing.T) {
-	o := options{
-		"name": "/tmp/file",
-		"mode": "600",
-	}
-	_, err := file.NewModeState(o)
-	if err != nil {
-		t.Errorf("got error, %v", err)
 	}
 }
 

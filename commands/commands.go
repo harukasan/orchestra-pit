@@ -12,23 +12,6 @@ type State interface {
 	Test() error
 }
 
-// StateFactory is interface of the factory struct of the state.
-//
-// New returns the initialized State object with given options. If failed to
-// creates a new state or passed invalid options, it returns nil and an error.
-type StateFactory interface {
-	New(options Options) (State, error)
-}
-
-// StateFactoryFunc is an adapter to use a function as StateFactory.
-type StateFactoryFunc func(options Options) (State, error)
-
-// New implements the StateFactory interface to use a StateFactoryFunc as
-// StateFactory interface.
-func (f StateFactoryFunc) New(options Options) (State, error) {
-	return f(options)
-}
-
 // Options is interface of the parameters of the initialize function of the state.
 //
 // Get returns the value string of the named parameter.
