@@ -18,6 +18,8 @@ type command interface {
 }
 
 var commands = map[string]command{
+	"apply":   applyCommand(),
+	"test":    testCommand(),
 	"version": &version{},
 }
 
@@ -34,6 +36,9 @@ func main() {
 	if command := commands[name]; command != nil {
 		os.Exit(command.run(os.Args[2:]))
 	}
+	fmt.Printf("unknown command: %s\n", name)
+	usage()
+	os.Exit(1)
 }
 
 func usage() {
