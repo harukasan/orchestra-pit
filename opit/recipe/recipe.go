@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	"github.com/harukasan/orchestra-pit/opit/logger"
-	"github.com/harukasan/orchestra-pit/opit/resource"
+	"github.com/harukasan/orchestra-pit/resource"
 )
 
 // Recipe represents the recipe which desribes disired states of resources.

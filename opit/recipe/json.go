@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/harukasan/orchestra-pit/opit/resource"
+	"github.com/harukasan/orchestra-pit/resource"
 )
 
 // ParseJSON parses the recipe file serialized by JSON.
