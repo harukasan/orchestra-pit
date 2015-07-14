@@ -7,6 +7,7 @@ import (
 
 	"github.com/harukasan/orchestra-pit/opit/logger"
 	"github.com/harukasan/orchestra-pit/opit/recipe"
+	"github.com/harukasan/orchestra-pit/opit/resource"
 )
 
 type test struct {
@@ -43,7 +44,7 @@ func (c *test) run(args []string) int {
 	exit := 0
 	for _, res := range rec.Resources {
 		logger.Debugf("------ testing %s", res)
-		if err := res.Test(); err != nil {
+		if err := resource.Test(res); err != nil {
 			exit = 1
 			logger.Errorf("[FAIL] %s", err)
 			continue

@@ -7,6 +7,7 @@ import (
 
 	"github.com/harukasan/orchestra-pit/opit/logger"
 	"github.com/harukasan/orchestra-pit/opit/recipe"
+	"github.com/harukasan/orchestra-pit/opit/resource"
 )
 
 type apply struct {
@@ -40,17 +41,18 @@ func (c *apply) run(args []string) int {
 		logger.Fatal(err)
 	}
 
-	// apply resources
+	exit := 0
 	for _, res := range rec.Resources {
 		logger.Debugf("------ testing %s", res)
-		if err := res.Test(); err != nil {
+		if err := resource.Test(res); err != nil {
 			logger.Debugf("failed to test: %s", err)
 		} else {
 			logger.Infof("[ OK ] %s", res)
 			continue
 		}
 		logger.Debugf("------ applying %s", res)
-		if err := res.Apply(); err != nil {
+		if err := resource.Apply(res); err != nil {
+			exit = 1
 			logger.Debugf("failed to apply: %s", err)
 			logger.Errorf("[FAIL] %s", res)
 			continue
@@ -58,7 +60,7 @@ func (c *apply) run(args []string) int {
 		logger.Infof("[DONE] %s", res)
 	}
 
-	return 0
+	return exit
 }
 
 func (c *apply) flags(args []string) *flag.FlagSet {
