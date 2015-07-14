@@ -3,7 +3,7 @@ package homebrew_test
 import (
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/packagemanager/homebrew"
+	"github.com/harukasan/orchestra-pit/state/packagemanager/homebrew"
 )
 
 func TestHomebrew(t *testing.T) {

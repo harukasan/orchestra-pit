@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/harukasan/orchestra-pit/commands/packagemanager/homebrew"
+	"github.com/harukasan/orchestra-pit/state/packagemanager/homebrew"
 )
 
 type updateOnce struct {

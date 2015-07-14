@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/harukasan/orchestra-pit/commands/platform"
+	"github.com/harukasan/orchestra-pit/state/platform"
 )
 
 // Version specifies the release versioning string of opit command.

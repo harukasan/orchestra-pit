@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/platform"
+	"github.com/harukasan/orchestra-pit/state/platform"
 )
 
 func TestParse(t *testing.T) {

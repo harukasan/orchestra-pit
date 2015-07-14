@@ -5,7 +5,7 @@ package platform_test
 import (
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/platform"
+	"github.com/harukasan/orchestra-pit/state/platform"
 )
 
 func TestIdentify(t *testing.T) {

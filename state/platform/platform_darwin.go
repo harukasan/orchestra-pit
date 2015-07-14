@@ -6,13 +6,12 @@
 package platform
 
 import (
-	"github.com/harukasan/orchestra-pit/commands/exec"
-
-	"github.com/harukasan/orchestra-pit/commands"
+	"github.com/harukasan/orchestra-pit/state"
+	"github.com/harukasan/orchestra-pit/state/exec"
 )
 
 // Identify detects the platform and returns Info of the platform.
-func Identify() (commands.Facts, error) {
+func Identify() (state.Facts, error) {
 	out, err := exec.Command("/usr/bin/sw_vers").Output()
 	if err != nil {
 		return nil, err

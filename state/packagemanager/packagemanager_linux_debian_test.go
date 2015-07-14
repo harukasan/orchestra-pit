@@ -8,8 +8,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/packagemanager"
-	"github.com/harukasan/orchestra-pit/commands/platform"
+	"github.com/harukasan/orchestra-pit/state/packagemanager"
+	"github.com/harukasan/orchestra-pit/state/platform"
 )
 
 func TestMain(m *testing.M) {

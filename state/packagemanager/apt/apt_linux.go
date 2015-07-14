@@ -9,7 +9,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/harukasan/orchestra-pit/commands/exec"
+	"github.com/harukasan/orchestra-pit/state/exec"
 )
 
 // APTGetPath specifies the file path of the apt-get command

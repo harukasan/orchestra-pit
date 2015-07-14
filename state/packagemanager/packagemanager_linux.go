@@ -7,11 +7,11 @@ package packagemanager
 import (
 	"errors"
 
-	"github.com/harukasan/orchestra-pit/commands"
-	"github.com/harukasan/orchestra-pit/commands/platform"
+	"github.com/harukasan/orchestra-pit/state"
+	"github.com/harukasan/orchestra-pit/state/platform"
 )
 
-func (s *Installed) stateForSpecificPlatform() (commands.State, error) {
+func (s *Installed) stateForSpecificPlatform() (state.State, error) {
 	p, err := platform.Identify()
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (s *Installed) test() error {
 	return ps.Test()
 }
 
-func (s *Removed) stateForSpecificPlatform() (commands.State, error) {
+func (s *Removed) stateForSpecificPlatform() (state.State, error) {
 	p, err := platform.Identify()
 	if err != nil {
 		return nil, err

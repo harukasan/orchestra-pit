@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/file"
-	"github.com/harukasan/orchestra-pit/commands/file/testutil"
+	"github.com/harukasan/orchestra-pit/state/file"
+	"github.com/harukasan/orchestra-pit/state/file/testutil"
 )
 
 var d = testutil.TempDir()

@@ -1,14 +1,14 @@
 package resource
 
 import (
-	"github.com/harukasan/orchestra-pit/commands"
 	"github.com/harukasan/orchestra-pit/opit/logger"
 	"github.com/harukasan/orchestra-pit/opit/resource/file"
 	"github.com/harukasan/orchestra-pit/opit/resource/packagemanager"
+	"github.com/harukasan/orchestra-pit/state"
 )
 
 type Resource interface {
-	States() ([]commands.State, error)
+	States() ([]state.State, error)
 }
 
 func New(t string) Resource {

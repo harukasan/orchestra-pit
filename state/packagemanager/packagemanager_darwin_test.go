@@ -7,7 +7,7 @@ package packagemanager_test
 import (
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/packagemanager"
+	"github.com/harukasan/orchestra-pit/state/packagemanager"
 )
 
 func TestInstalled(t *testing.T) {

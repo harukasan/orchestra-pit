@@ -1,6 +1,8 @@
-package commands
+package state
 
-// State is interface of the state of the resource.
+// State is interface of the desired state of the resource.
+// The state is operating unit of the resource, e.g., the contents, permissions,
+// existence of files, the installed state of the package of package managers.
 //
 // Apply tries to change the state to the desired. Apply returns an error,
 // if failed to modify the state.

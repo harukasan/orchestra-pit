@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/file"
+	"github.com/harukasan/orchestra-pit/state/file"
 )
 
 type options map[string]string

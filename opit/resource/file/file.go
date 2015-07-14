@@ -9,9 +9,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/harukasan/orchestra-pit/commands"
-	"github.com/harukasan/orchestra-pit/commands/file"
 	"github.com/harukasan/orchestra-pit/opit/logger"
+	"github.com/harukasan/orchestra-pit/state"
+	"github.com/harukasan/orchestra-pit/state/file"
 )
 
 type Resource struct {
@@ -23,8 +23,8 @@ type Resource struct {
 	Mode   string `json:"mode"  yaml:"mode"`
 }
 
-func (r *Resource) States() ([]commands.State, error) {
-	states := []commands.State{}
+func (r *Resource) States() ([]state.State, error) {
+	states := []state.State{}
 
 	if r.State == "" {
 		r.State = "file"
@@ -49,7 +49,7 @@ func (r *Resource) States() ([]commands.State, error) {
 	return states, nil
 }
 
-type stateFunc func(r *Resource) (commands.State, error)
+type stateFunc func(r *Resource) (state.State, error)
 
 var stateFuncMap = map[string]stateFunc{
 	"absence":   absenceState,
@@ -59,7 +59,7 @@ var stateFuncMap = map[string]stateFunc{
 	"symlink":   symlinkState,
 }
 
-func absenceState(r *Resource) (commands.State, error) {
+func absenceState(r *Resource) (state.State, error) {
 	if r.Path == "" {
 		return nil, fmt.Errorf(`parameter "path" is required`)
 	}
@@ -68,7 +68,7 @@ func absenceState(r *Resource) (commands.State, error) {
 	}, nil
 }
 
-func directoryState(r *Resource) (commands.State, error) {
+func directoryState(r *Resource) (state.State, error) {
 	if r.Path == "" {
 		return nil, fmt.Errorf(`parameter "path" is required`)
 	}
@@ -77,7 +77,7 @@ func directoryState(r *Resource) (commands.State, error) {
 	}, nil
 }
 
-func fileState(r *Resource) (commands.State, error) {
+func fileState(r *Resource) (state.State, error) {
 	if r.Path == "" {
 		return nil, fmt.Errorf(`parameter "path" is required`)
 	}
@@ -103,7 +103,7 @@ func fileState(r *Resource) (commands.State, error) {
 	}, nil
 }
 
-func hardlinkState(r *Resource) (commands.State, error) {
+func hardlinkState(r *Resource) (state.State, error) {
 	if r.Path == "" {
 		return nil, fmt.Errorf(`parameter "path" is required`)
 	}
@@ -116,7 +116,7 @@ func hardlinkState(r *Resource) (commands.State, error) {
 	}, nil
 }
 
-func symlinkState(r *Resource) (commands.State, error) {
+func symlinkState(r *Resource) (state.State, error) {
 	if r.Path == "" {
 		return nil, fmt.Errorf(`parameter "path" is required`)
 	}

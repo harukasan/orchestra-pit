@@ -7,7 +7,7 @@ package packagemanager
 import (
 	"sync"
 
-	"github.com/harukasan/orchestra-pit/commands/packagemanager/apt"
+	"github.com/harukasan/orchestra-pit/state/packagemanager/apt"
 )
 
 type updateOnce struct {

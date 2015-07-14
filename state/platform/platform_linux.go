@@ -10,8 +10,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/harukasan/orchestra-pit/commands"
-	"github.com/harukasan/orchestra-pit/commands/exec"
+	"github.com/harukasan/orchestra-pit/state/exec"
 )
 
 // ErrNotIdentified is an error caused when the function could not identify the

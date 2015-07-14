@@ -3,7 +3,7 @@ package exec_test
 import (
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/exec"
+	"github.com/harukasan/orchestra-pit/state/exec"
 )
 
 func TestExec(t *testing.T) {

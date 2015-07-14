@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/file"
+	"github.com/harukasan/orchestra-pit/state/file"
 )
 
 type testPattern struct {

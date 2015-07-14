@@ -7,7 +7,7 @@ package apt_test
 import (
 	"testing"
 
-	"github.com/harukasan/orchestra-pit/commands/packagemanager/apt"
+	"github.com/harukasan/orchestra-pit/state/packagemanager/apt"
 )
 
 var TargetPackage = "debian-faq"

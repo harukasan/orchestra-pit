@@ -11,7 +11,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/harukasan/orchestra-pit/commands"
+	"github.com/harukasan/orchestra-pit/state"
 )
 
 // IdentifyDebianRelease tires to read the debian_version file to
@@ -52,7 +52,7 @@ func IdentifyDebianRelease() (*Info, error) {
 	}, nil
 }
 
-func identifyDebianDerivertives(lsb commands.Facts) (*Info, error) {
+func identifyDebianDerivertives(lsb state.Facts) (*Info, error) {
 	info, ok := lsb.(*LSBInfo)
 	if !ok {
 		return nil, errors.New("failed to read lsb attributes")
