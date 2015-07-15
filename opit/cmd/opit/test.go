@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/harukasan/orchestra-pit/opit/logger"
-	"github.com/harukasan/orchestra-pit/opit/recipe"
+	"github.com/harukasan/orchestra-pit/recipe"
 	"github.com/harukasan/orchestra-pit/resource"
 )
 
